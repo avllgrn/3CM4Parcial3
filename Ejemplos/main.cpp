@@ -1,61 +1,71 @@
 #include <iostream>
 #include <stdlib.h>
+#include <time.h>
 using namespace std;
 
-bool esNumero(char c){
-    return 48<=c && c <=57;
-}
-bool esMayuscula(char c){
-    return 65<=c && c <=90;
-}
-bool esMinuscula(char c){
-    return 97<=c && c <=122;
-}
-bool esLetra(char c){
-    return esMayuscula(c) || esMinuscula(c);
-}
-bool esEspecial(char c){
-    return !esLetra(c) && !esNumero(c);
+void rellenaVector(int n, int X[50]){
+    for(int i=0; i<n; i++)
+        X[i] = rand()%100;
 }
 
-string procesaCadena(string Cadena){
-    string Procesada;
-    char c;
-    int i,tam;
-    tam = Cadena.size();
-
-    for(i=0; i<tam; i++)
-        if(!esEspecial(Cadena.at(i)))
-            Procesada.push_back(toupper(Cadena.at(i)));
-
-    return Procesada;
+void muestraVector(int n, int X[50]){
+    for(int i=0; i<n; i++)
+        cout<<X[i]<<" ";
+    cout<<endl;
 }
 
-bool esPalindromo(string& Cadena, int ini, int fin){
-    int n = fin-ini+1;
-    if(n <= 1)
-        return true;
-    else if(Cadena[ini]!=Cadena[fin])
-        return false;
-    else{
-        cout<<Cadena.substr(ini+1, n-2)<<endl;
-        return esPalindromo(Cadena, ini+1, fin-1);
+void intercambia(int X[50], int i, int f){
+    int aux=X[i];
+    X[i] = X[f];
+    X[f] = aux;
+}
+
+int particiona(int X[50], int ini, int fin){
+    int piv = X[fin];
+    int i=ini;
+    int f=fin-1;
+    cout<<"ini="<<ini<<" fin="<<fin<<" piv="<<piv<<endl;
+    while(i<=f){
+        if(X[i]>piv){
+            intercambia(X,i,f);
+            f--;
+        }
+        else{
+            i++;
+        }
+    }
+    cout<<"i="<<i<<" f="<<f<<" piv="<<piv<<endl;
+    intercambia(X,i,fin);
+    return i-1;
+}
+
+void quickSort(int X[50], int ini, int fin){
+    if(ini<fin){
+        int p = particiona(X, ini, fin);
+        cout<<"p="<<p<<endl;
+        quickSort(X,ini,p);
+        quickSort(X,p+1,fin);
     }
 }
 
+void quickSort(int n, int X[50]){
+    quickSort(X,0,n-1);
+}
+
 int main(void){
-    string Cadena, Procesada;
-    char c;
-    int i,tam;
-    cout<<"Ingresa una cadena de caracteres ";
-    getline(cin, Cadena);
+    srand(time(NULL));
+    int n, V[50];
+    cout<<"Cuantos? ";cin>>n;
 
-    Procesada = procesaCadena(Cadena);
+    rellenaVector(n, V);
+    cout<<endl<<"V inicial"<<endl;
+    muestraVector(n, V);
+    cout<<endl<<endl;
 
-    if(esPalindromo(Procesada,0,Procesada.size()-1))
-        cout<<"ES palindromo."<<endl;
-    else
-        cout<<"NO es palindromo."<<endl;
+    quickSort(n, V);
+    cout<<endl<<"V final"<<endl;
+    muestraVector(n, V);
+    cout<<endl<<endl;
 
     return 0;
 }
