@@ -2,32 +2,25 @@
 #include <stdlib.h>
 using namespace std;
 
-int fibonacci(int n){
-    if(n>1)
-        cout<<"fibonacci("<<n<<") = "<<"fibonacci("<<n-1<<") + "<<"fibonacci("<<n-2<<")"<<endl;
-    else if(n==1)
-        cout<<"fibonacci(1) = 1"<<endl;
+string f(int n){
+    cout<<"f("<<n<<")"<<endl;
+    if(n==0)
+        return "";
+    else if(n%2==0)
+        return f(n/2) + "0";
     else
-        cout<<"fibonacci(0) = 0"<<endl;
-
-    if(n==0 || n==1)
-        return n;
-    else
-        return fibonacci(n-1) + fibonacci(n-2);
+        return f(n/2) + "1";
 }
 
 int main(){
-    int n, f;
+    int n;
 
-    cout<<"Ingresa n ";cin>>n;
+    cout<<"Ingresa n ";
+    cin>>n;
     cout<<endl<<endl;
 
-    f = fibonacci(n);
-    cout<<endl<<endl;
-
-    cout<<"fibonacci("<<n<<") = "<<f;
-    cout<<endl<<endl;
+    string binario = f(n);
+    cout<<endl<<endl<< n <<"(10) = "<< binario <<"(2)"<<endl<<endl;
 
     return 0;
 }
-
