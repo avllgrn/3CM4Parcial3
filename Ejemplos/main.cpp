@@ -2,15 +2,18 @@
 #include <stdlib.h>
 using namespace std;
 
-int factorial(int n){
-    if(n>=1)
-        cout<<n<<"! = "<<n<<" * "<<n-1<<"!"<<endl;
+int fibonacci(int n){
+    if(n>1)
+        cout<<"fibonacci("<<n<<") = "<<"fibonacci("<<n-1<<") + "<<"fibonacci("<<n-2<<")"<<endl;
+    else if(n==1)
+        cout<<"fibonacci(1) = 1"<<endl;
     else
-        cout<<"0! = 1"<<endl;
-    if(n==0)
-        return 1;
+        cout<<"fibonacci(0) = 0"<<endl;
+
+    if(n==0 || n==1)
+        return n;
     else
-        return n * factorial(n-1);
+        return fibonacci(n-1) + fibonacci(n-2);
 }
 
 int main(){
@@ -19,10 +22,10 @@ int main(){
     cout<<"Ingresa n ";cin>>n;
     cout<<endl<<endl;
 
-    f = factorial(n);
+    f = fibonacci(n);
     cout<<endl<<endl;
 
-    cout<<n<<"! = "<<f;
+    cout<<"fibonacci("<<n<<") = "<<f;
     cout<<endl<<endl;
 
     return 0;
