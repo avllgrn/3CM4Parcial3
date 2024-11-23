@@ -2,25 +2,27 @@
 #include <stdlib.h>
 using namespace std;
 
-int potencia(int a, int b){
-    cout<<a<<" ^ "<<b<<" = "<<a<<" * ("<<a<<" ^ "<<b-1<<")"<<endl;
-    if(b==1)
-        return a;
+int sumatoria(int n){
+    if(n>=1)
+        cout<<"Suma de [0, "<<n<<"] = "<<n<<" + Suma de [0, "<<n-1<<"]"<<endl;
     else
-        return a * potencia(a, b-1);
+        cout<<"Suma de [0, 0] = 0"<<endl;
+    if(n==0)
+        return 0;
+    else
+        return n + sumatoria(n-1);
 }
 
 int main(){
-    int a, b, c;
+    int n, s;
 
-    cout<<"Ingresa a ";cin>>a;
-    cout<<"Ingresa b ";cin>>b;
+    cout<<"Ingresa n ";cin>>n;
     cout<<endl<<endl;
 
-    c = potencia(a, b);
+    s = sumatoria(n);
     cout<<endl<<endl;
 
-    cout<<a<<" ^ "<<b<<" = "<<c;
+    cout<<"Suma de [0, "<<n<<"] = "<<s;
     cout<<endl<<endl;
 
     return 0;
