@@ -2,27 +2,27 @@
 #include <stdlib.h>
 using namespace std;
 
-int sumatoria(int n){
+int factorial(int n){
     if(n>=1)
-        cout<<"Suma de [0, "<<n<<"] = "<<n<<" + Suma de [0, "<<n-1<<"]"<<endl;
+        cout<<n<<"! = "<<n<<" * "<<n-1<<"!"<<endl;
     else
-        cout<<"Suma de [0, 0] = 0"<<endl;
+        cout<<"0! = 1"<<endl;
     if(n==0)
-        return 0;
+        return 1;
     else
-        return n + sumatoria(n-1);
+        return n * factorial(n-1);
 }
 
 int main(){
-    int n, s;
+    int n, f;
 
     cout<<"Ingresa n ";cin>>n;
     cout<<endl<<endl;
 
-    s = sumatoria(n);
+    f = factorial(n);
     cout<<endl<<endl;
 
-    cout<<"Suma de [0, "<<n<<"] = "<<s;
+    cout<<n<<"! = "<<f;
     cout<<endl<<endl;
 
     return 0;
